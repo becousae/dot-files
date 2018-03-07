@@ -1,0 +1,72 @@
+\usepackage[utf8]{inputenc}
+\usepackage[a4paper,
+  top=2cm,
+  bottom=2cm,
+  left=3cm,
+  right=2cm,
+  headheight=60pt,
+  includeheadfoot]{geometry}
+
+% Captions {{{
+\usepackage{caption}
+\DeclareCaptionLabelFormat{nolabel}{}
+\captionsetup{labelformat=nolabel}
+\usepackage[unicode=true]{hyperref}
+\hypersetup{breaklinks=true, pdfborder={0 0 0}}
+% }}}
+% Lists {{{
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+% }}}
+% Colors {{{
+    \usepackage[table]{xcolor}
+% }}}
+% Paragraph indentation {{{
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+% }}}
+% General packages {{{
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{multicol}
+\usepackage{sectsty}
+\usepackage{titlesec}
+\usepackage{chngcntr}
+% }}}
+% Tables {{{
+% Copied from https://github.com/Wandmalfarbe/pandoc-latex-template
+\usepackage{longtable, booktabs}
+
+\definecolor{table-row-color}{HTML}{F5F5F5}
+\definecolor{table-rule-color}{HTML}{999999}
+
+\usepackage{colortbl}
+\arrayrulecolor{table-rule-color}     % color of \toprule, \midrule, \bottomrule
+\setlength\heavyrulewidth{0.1ex}      % thickness of \toprule, \bottomrule
+\renewcommand{\arraystretch}{1.5}     % spacing (padding)
+\rowcolors{3}{}{table-row-color!100}  % row color
+
+% Reset rownum counter so that each table
+% starts with the same row colors.
+% https://tex.stackexchange.com/questions/170637/restarting-rowcolors
+\let\oldlongtable\longtable
+\let\endoldlongtable\endlongtable
+\renewenvironment{longtable}{\oldlongtable} {
+\endoldlongtable
+\global\rownum=0\relax}
+
+% Unfortunately the colored cells extend beyond the edge of the
+% table because pandoc uses @-expressions (@{}) like so:
+%
+% \begin{longtable}[]{@{}ll@{}}
+% \end{longtable}
+%
+% https://en.wikibooks.org/wiki/LaTeX/Tables#.40-expressions
+% }}}
+% Titles {{{
+\titlespacing\section{0pt}{12pt plus 2pt minus 2pt}{0pt plus 2pt minus 2pt}
+\titlespacing\subsection{0pt}{12pt plus 2pt minus 2pt}{0pt plus 2pt minus 2pt}
+\titlespacing\subsubsection{0pt}{6pt plus 2pt minus 2pt}{0pt plus 2pt minus 2pt}
+\renewcommand\thesubsubsection{\arabic{subsubsection}}
+% }}}

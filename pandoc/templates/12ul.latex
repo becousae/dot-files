@@ -1,0 +1,43 @@
+\documentclass[a4paper]{article}
+
+% Logo
+\usepackage{scrlayer-scrpage}
+
+\DeclareNewLayer[background,
+  head,
+  addhoffset=-\marginparwidth-\marginparsep,
+  width=\marginparwidth,% optional reduce layer width
+  contents={\includegraphics[width=\marginparwidth]{\string~/.pandoc/templates/12ul/logo}\vspace{3em}}]{image}
+
+\AddLayersToPageStyle{scrheadings}{image}
+
+% General Template Options
+\usepackage{template}
+
+% Header
+\usepackage{mdframed}
+\newmdenv[leftline=false,rightline=false,tikzsetting={dashed,dash pattern = on 4pt off 3pt}]{topbot}
+
+\rohead{
+  \begin{topbot}
+    \vspace{1em}
+    {\huge \color{blue} \textbf{$title$}}\\[0.2cm]
+    Door Benjamin Cousaert
+    \textbullet
+    \ benjamin.cousaert@12urenloop.be
+    \textbullet
+    \ +32 477 67 48 68
+    \vspace{1em}
+  \end{topbot}
+}
+
+% Colors
+\definecolor{blue}{RGB}{44, 44, 136}
+\definecolor{yellow}{RGB}{255, 255, 1}
+\sectionfont{\color{blue}}
+
+\begin{document}
+
+$body$
+
+\end{document}

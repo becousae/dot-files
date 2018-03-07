@@ -1,0 +1,53 @@
+\documentclass[a4paper]{article}
+
+% Logo
+\usepackage{scrlayer-scrpage}
+
+\DeclareNewLayer[background,
+  head,
+  addhoffset=-\marginparwidth-\marginparsep,
+  width=\marginparwidth,% optional reduce layer width
+  contents={\includegraphics[width=\marginparwidth]{\string~/.pandoc/templates/sko/logo}}]{image}
+
+\AddLayersToPageStyle{scrheadings}{image}
+
+% General Template Options
+\usepackage{template}
+
+% Header
+\usepackage[framemethod=tikz]{mdframed}
+\newmdenv[leftline=false,rightline=false,tikzsetting={dashed,dash pattern = on 4pt off 3pt}]{topbot}
+
+\rohead{
+  \begin{mdframed}[
+      leftline=false,
+      rightline=false,
+      linecolor=white,
+      tikzsetting={draw=red,dashed,line width=2pt,dash pattern = on 2pt off 2pt}
+    ]
+    \vspace{1em}
+    {\huge \color{red} \textbf{$title$}}\\[0.2cm]
+    Door Benjamin Cousaert
+    \textbullet
+    \ benjamin.cousaert@studentkickoff.be
+    \textbullet
+    \ +32 477 67 48 68
+    \vspace{1em}
+  \end{mdframed}
+}
+
+% Colors
+\definecolor{red}{RGB}{227,50,38}
+\sectionfont{\color{red}}
+
+% Numbered sections
+$if(numbersections)$
+$else$
+\setcounter{secnumdepth}{0}
+$endif$
+
+\begin{document}
+
+$body$
+
+\end{document}
