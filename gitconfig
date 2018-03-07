@@ -1,0 +1,19 @@
+[user]
+    name = benji
+    email = benjamin.cousaert@gmail.com
+[core]
+    excludesfile = ~/.gitignore_global
+    editor = nvim
+[push]
+    default = simple
+[merge]
+    tool = vimdiff
+[diff]
+    tool = vimdiff
+[color]
+    ui = auto
+    branch = auto
+    diff = auto
+    status = auto
+[github]
+    user = becousae
