@@ -1,4 +1,50 @@
-function! Extract()
+" Compiles the current markdown file
+function! PandocCompile()
+  let command=s:PandocCommand()
+  echo(command)
+  silent! execute(command)
+endfunction
+
+
+" Open the compiled PDF in Skim
+function! OpenPDF()
+  let command="!open -a Skim " . s:PdfName()
+  echo(command)
+  silent! execute(command)
+endfunction
+
+" Mappings
+nnoremap <Leader>tt :call PandocCompile()<CR>
+nnoremap <Leader>ts :call OpenPDF()<CR>
+
+" === local functions ===
+
+" Returns the name of the pdf that matches the first argument of the current file
+function! s:PdfName(...)
+  if a:0 == 0 " If no arguments, use current file
+    let l:file = @%
+  else
+    let l:file = a:1
+  endif
+  return substitute(l:file, "md$", "pdf", "")
+endfunction
+
+function! s:PandocCommand()
+  let s:headers=s:Parse()
+  let s:input=@%
+  let s:command=["!clear", "&&", "!pandoc", s:input, "-o", s:PdfName(s:input)]
+  if has_key(s:headers, "template")
+    call add(s:command, "--template")
+    call add(s:command, s:headers["template"])
+  endif
+  if !has_key(s:headers, "numbersections") || s:headers["numbersections"] ==? "true"
+    call add(s:command, "-N")
+  end
+  return join(s:command)
+endfunction
+
+" Returns an array with all the YAML Headers as strings
+function! s:Extract()
   let l:tmp_lines = []
   let l:cline_n = 1
   while l:cline_n < 100 " arbitrary, but no sense in having huge yaml headers either
@@ -18,9 +64,10 @@ function! Extract()
   return [] " just in case
 endfunction
 
-function! Parse(...)
+" s:Parses the YAML Headers into a dict
+function! s:Parse(...)
   if a:0 == 0 " if no arguments, extract from the current buffer
-    let l:block = Extract()
+    let l:block = s:Extract()
   else
     let l:block = a:1
   endif
@@ -42,24 +89,3 @@ function! Parse(...)
   endfor
   return yaml_dict
 endfunction au!
-
-function! PandocCompile()
-  let headers=Parse()
-  let file=@%
-  let out=substitute(file, "md$", "pdf", "")
-  let command="!pandoc " . file . " -o " . out  . " --template " . headers["template"] . " -N"
-  echo(command)
-  silent! execute(command)
-endfunction
-
-nnoremap <Leader>tt :call PandocCompile()<CR>
-
-function! OpenPDF()
-  let file=@%
-  let out=substitute(file, "md$", "pdf", "")
-  let command="!open -a Skim " . out
-  echo(command)
-  silent! execute(command)
-endfunction
-
-nnoremap <Leader>ts :call OpenPDF()<CR>
