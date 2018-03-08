@@ -4,61 +4,50 @@ endif
 
 " Plugins {{{
 " Required:
-set runtimepath+=~/.config/nvim/plugged/repos/github.com/Shougo/dein.vim
+call plug#begin('~/.vim/plugged')
+
+" Let Plug manage dein
+" Required:
+Plug '~/.config/nvim/plugged//repos/github.com/Shougo/dein.vim'
+
+" File Tree
+Plug 'scrooloose/nerdtree'
+" Fuzzy search
+Plug 'ctrlpvim/ctrlp.vim'
+
+" (Un)comment lines
+Plug  'scrooloose/nerdcommenter'
+" Align stuff
+Plug  'junegunn/vim-easy-align'
+" End some structures (if, do, def, ....)
+Plug  'tpope/vim-endwise'
+" Close quotes, parenthesis, brackets, ...
+Plug  'Raimondi/delimitMate'
+" Change quotes, parenthesis, brackets, ...
+Plug  'tpope/vim-surround'
+
+" Completion
+Plug  'Valloric/YouCompleteMe'
+
+" Repeat map instead of command
+Plug  'tpope/vim-repeat'
+
+" Colors
+Plug  'chriskempson/tomorrow-theme', {'rtp': 'vim/'}
+" Status bar
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+
+" Syntax highlighting
+Plug 'vim-pandoc/vim-pandoc-syntax'
+Plug 'slim-template/vim-slim'
 
 " Required:
-if dein#load_state('~/.config/nvim/plugged/')
-  call dein#begin('~/.config/nvim/plugged/')
-
-  " Let dein manage dein
-  " Required:
-  call dein#add('~/.config/nvim/plugged//repos/github.com/Shougo/dein.vim')
-
-  " File Tree
-  call dein#add('scrooloose/nerdtree')
-  " Fuzzy search
-  call dein#add('ctrlpvim/ctrlp.vim')
-
-  " (Un)comment lines
-  call dein#add( 'scrooloose/nerdcommenter')
-  " Align stuff
-  call dein#add( 'junegunn/vim-easy-align')
-  " End some structures (if, do, def, ....)
-  call dein#add( 'tpope/vim-endwise')
-  " Close quotes, parenthesis, brackets, ...
-  call dein#add( 'Raimondi/delimitMate')
-  " Change quotes, parenthesis, brackets, ...
-  call dein#add( 'tpope/vim-surround')
-
-  " Completion
-  " call dein#add( 'Valloric/YouCompleteMe')
-
-  " Repeat map instead of command
-  call dein#add( 'tpope/vim-repeat')
-
-  " Colors
-  call dein#add( 'chriskempson/tomorrow-theme', {'rtp': 'vim/'})
-  " Status bar
-  call dein#add('vim-airline/vim-airline')
-  call dein#add('vim-airline/vim-airline-themes')
-
-  " Syntax highlighting
-  call dein#add('vim-pandoc/vim-pandoc-syntax')
-  call dein#add('slim-template/vim-slim')
-
-  " Required:
-  call dein#end()
-  call dein#save_state()
-endif
+call plug#end()
 
 " Required:
 filetype plugin indent on
 syntax enable
-
-" If you want to install not installed plugins on startup.
-if dein#check_install()
-  call dein#install()
-endif
 " }}}
 
 " Leader
@@ -189,6 +178,8 @@ let g:pandoc#modules#disabled = ["folding", "spell"]
 augroup pandoc_syntax
   au! BufNewFile,BufFilePre,BufRead *.md set filetype=markdown.pandoc
 augroup END
+let g:ycm_server_keep_logfiles = 1
+let g:ycm_server_log_level = 'debug'
 
 " Create parent directories {{{
 augroup BWCCreateDir
