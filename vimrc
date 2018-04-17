@@ -16,24 +16,24 @@ Plug 'scrooloose/nerdtree'
 Plug 'ctrlpvim/ctrlp.vim'
 
 " (Un)comment lines
-Plug  'scrooloose/nerdcommenter'
+Plug 'scrooloose/nerdcommenter'
 " Align stuff
-Plug  'junegunn/vim-easy-align'
+Plug 'junegunn/vim-easy-align'
 " End some structures (if, do, def, ....)
-Plug  'tpope/vim-endwise'
+Plug 'tpope/vim-endwise'
 " Close quotes, parenthesis, brackets, ...
-Plug  'Raimondi/delimitMate'
+Plug 'Raimondi/delimitMate'
 " Change quotes, parenthesis, brackets, ...
-Plug  'tpope/vim-surround'
+Plug 'tpope/vim-surround'
 
 " Completion
-Plug  'Valloric/YouCompleteMe'
+Plug 'Valloric/YouCompleteMe'
 
 " Repeat map instead of command
-Plug  'tpope/vim-repeat'
+Plug 'tpope/vim-repeat'
 
 " Colors
-Plug  'chriskempson/tomorrow-theme', {'rtp': 'vim/'}
+Plug 'chriskempson/tomorrow-theme', {'rtp': 'vim/'}
 " Status bar
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
@@ -41,6 +41,7 @@ Plug 'vim-airline/vim-airline-themes'
 " Syntax highlighting
 Plug 'vim-pandoc/vim-pandoc-syntax'
 Plug 'slim-template/vim-slim'
+Plug 'juanchanco/vim-jbuilder'
 
 " Required:
 call plug#end()
@@ -172,7 +173,7 @@ nmap <Enter> o<Esc>
 " NerdTree
 nmap <leader>p :NERDTreeFind<CR>
 " CtrlP
-set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*/node_modules/*
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*/node_modules/*,*/dist/*
 " Pandoc
 let g:pandoc#modules#disabled = ["folding", "spell"]
 augroup pandoc_syntax
@@ -180,6 +181,8 @@ augroup pandoc_syntax
 augroup END
 let g:ycm_server_keep_logfiles = 1
 let g:ycm_server_log_level = 'debug'
+nmap ga <Plug>(EasyAlign)
+xmap ga <Plug>(EasyAlign)
 
 " Create parent directories {{{
 augroup BWCCreateDir
