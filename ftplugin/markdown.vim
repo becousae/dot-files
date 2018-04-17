@@ -32,7 +32,7 @@ endfunction
 function! s:PandocCommand()
   let s:headers=s:Parse()
   let s:input=@%
-  let s:command=["!clear", "&&", "!pandoc", s:input, "-o", s:PdfName(s:input)]
+  let s:command=["!pandoc", s:input, "-o", s:PdfName(s:input)]
   if has_key(s:headers, "template")
     call add(s:command, "--template")
     call add(s:command, s:headers["template"])
